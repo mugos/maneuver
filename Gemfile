@@ -45,6 +45,11 @@ gem 'roar'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  # Cucumber
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 group :development do
