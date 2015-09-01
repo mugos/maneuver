@@ -3,7 +3,7 @@ db:
   ports:
     - "5432:5432"
 
-web: 
+maneuver: 
   build: .
   command: rails s -p 3000 -b '0.0.0.0'
   links:

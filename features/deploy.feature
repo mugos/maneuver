@@ -1,2 +1,7 @@
-Feature: Deploy app
-  Scenario: Test1
+Feature: Manage Deploys
+  User should be abble to deploy an app
+
+  Scenario: Should be able to CREATE a new app
+    Given ...
+    When ...
+    Then ...

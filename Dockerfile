@@ -10,17 +10,11 @@ RUN gem install bundler --no-ri --no-rdoc
 # Install Rails
 RUN gem install rails --no-ri --no-rdoc
 
-# Make the app folder
-RUN mkdir app/
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
-# Set workdir
-WORKDIR app/
-
-# Add Gemfile
-ADD Gemfile Gemfile
-
-# Bundle install it
+ADD Gemfile* $APP_HOME/
 RUN bundle install
 
-# Add the rest of the source
-ADD . .
+ADD . $APP_HOME
