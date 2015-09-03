@@ -1,9 +1,10 @@
 require 'uri'
 
-class App < ActiveRecord::Base
-  class Create < Trailblazer::Operation
+class App
+  class Show < Trailblazer::Operation
     include CRUD
-    model App, :create
+    # include Responder
+    model App, :find
 
     contract do
       # include Reform::Form::ModelReflections
@@ -16,6 +17,7 @@ class App < ActiveRecord::Base
       validate :git_repo?
 
       private
+
       def git_repo?
         if git =~ URI::regexp
             true
@@ -24,21 +26,26 @@ class App < ActiveRecord::Base
         end
       end
     end
+  end
+
+  class Create < Show
+    action :create
 
     def process(params)
       validate(params[:app]) do |f|
-        f.save # save comment and user.
+        f.save
       end
     end
-  end # Create
+  end
 
   class Update < Create
-    model App, :update
-  end # Update
+    action :update
+  end
 
-  class Show < Trailblazer::Operation
-    include CRUD
-    model App, :find
+  class Destroy < Update
+    def process(params)
+      @model.destroy!
+    end
   end
 
   class Index < Trailblazer::Operation

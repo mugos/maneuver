@@ -40,7 +40,10 @@ class AppCrudTest < MiniTest::Spec
         }
       )
 
+      # Response false means it failed
       res.must_equal false
+
+      # Validates Operation
       op.errors.to_s.must_equal "{:git=>[\"is invalid\"], :name=>[\"is too short (minimum is 6 characters)\"]}"
       op.model.persisted?.must_equal false
     end
@@ -61,14 +64,14 @@ class AppCrudTest < MiniTest::Spec
   end
 
   describe "Update" do
-    let (:app) { App::Create[app: {
+    let (:app) { App::Create.call(app: {
       name: "Test App",
       git: "git@bitbucket.org:yebo-dev/sandbox.git",
       script: <<-STRING
         bundle install
         rails server
       STRING
-    }].model }
+    }).model }
 
     it "has a app alredy" do
       app.name.must_equal "Test App"
@@ -99,12 +102,38 @@ class AppCrudTest < MiniTest::Spec
 
   describe "show" do
     it "sees a app that alredy exists" do
-      pp App::Show.run(id: 1)
+      res, op = App::Create.run(
+        app: {
+          name: "Test App",
+          git: "git@bitbucket.org:yebo-dev/sandbox.git",
+          script: ""
+        }
+      )
 
-      # pp op.model
-      #
-      # app.name.must_equal "Test App"
-      # app.git.must_equal "git@bitbucket.org:yebo-dev/sandbox.git"
+      op = App::Show.present(op.model)
+
+      app = op.model
+
+      app.name.must_equal "Test App"
+      app.git.must_equal "git@bitbucket.org:yebo-dev/sandbox.git"
     end  # It
   end # Describe Show
+
+  describe "destroy" do
+    it "delete a alterdy existing app" do
+      res, op = App::Create.run(
+        app: {
+          name: "Test App",
+          git: "git@bitbucket.org:yebo-dev/sandbox.git",
+          script: ""
+        }
+      )
+
+      op.model.persisted?.must_equal true
+
+      res, op = App::Destroy.run(op.model)
+
+      op.model.persisted?.must_equal false
+    end  # It
+  end # Destroy
 end # AppCrud
