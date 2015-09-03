@@ -5,27 +5,26 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
   pool: 5
   timeout: 5000
-  user: postgres
-  host: <%= ENV['DB_1_PORT_5432_TCP_ADDR'] %>
-  port: <%= ENV['DB_1_PORT_5432_TCP_PORT'] %>
 
 development:
   <<: *default
-  database: cotifil_development 
+  database: db/dev.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
   <<: *default
-  database: cotifil_test
+  database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: cotifil_production 
-
-cucumber:
-  <<: *test
+  database: maneuver_production
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  user: postgres
+  host: <%= ENV['DB_1_PORT_5432_TCP_ADDR'] %>
+  port: <%= ENV['DB_1_PORT_5432_TCP_PORT'] %>
