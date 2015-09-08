@@ -9,7 +9,8 @@
   <%= f.input :address, placeholder: "address", label: false %>
   <%= f.input :source, placeholder: "source", label: false %>
 
-  <%= f.association :key, collection: keys, placeholder: "key", label: false %>
+  <%#= select :key, :id, Key.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
+  <%= collection_select :key, :id, Key.all, :id, :name %>
 
   <%= f.button :submit, class: :expand %>
 <% end %>

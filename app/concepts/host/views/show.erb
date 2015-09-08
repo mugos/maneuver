@@ -1,5 +1,11 @@
-<%= container do %>
-  <div class="header">
-    <%= link_to_name %>
-  </div>
-<% end %>
+<div class="header">
+  <%= link_to_name %>
+</div>
+
+<div class="row">
+  <p>name: <%= model.name %></p>
+  <p>sys_user: <%= model.sys_user %></p>
+  <p>address: <%= model.address %></p>
+  <p>source: <%= model.source %></p>
+  <p>key: <%= model.key %></p>
+</div>

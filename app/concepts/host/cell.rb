@@ -12,7 +12,7 @@ class Host::Cell < Cell::Concept
   end
 
   def link_to_name
-    link_to "#{model.id} - #{model.name}", app_path(model)
+    link_to "#{model.id} - #{model.name}", host_path(model)
   end
 
   class Form < Cell::Concept
@@ -20,6 +20,7 @@ class Host::Cell < Cell::Concept
 
     include ActionView::RecordIdentifier
     include SimpleForm::ActionViewExtensions::FormHelper
+    include ActionView::Helpers::FormOptionsHelper
 
     def keys
       Key.all.map { |r| [r.name, r.id] }
