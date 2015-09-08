@@ -21,4 +21,21 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.datetime "updated_at"
   end
 
+  create_table "hosts", force: :cascade do |t|
+    t.string  "name"
+    t.string  "address"
+    t.string  "sys_user"
+    t.string  "source"
+    t.integer "key_id"
+  end
+
+  add_index "hosts", ["key_id"], name: "index_hosts_on_key_id"
+
+  create_table "keys", force: :cascade do |t|
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end

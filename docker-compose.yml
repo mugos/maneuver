@@ -3,7 +3,12 @@ db:
   ports:
     - "5432:5432"
 
-maneuver: 
+# test:
+#   image: ./test/ssh_container
+#   ports:
+#     - "22:22"
+
+maneuver:
   build: .
   command: rails s -p 3000 -b '0.0.0.0'
   links:

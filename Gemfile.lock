@@ -60,6 +60,9 @@ GEM
     cells (4.0.2)
       tilt (>= 1.4, < 3)
       uber (~> 0.0.9)
+    cells-erb (0.0.6)
+      cells (~> 4.0.0.beta6)
+      erbse (>= 0.0.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -72,6 +75,7 @@ GEM
     disposable (0.1.11)
       representable (>= 2.2.3, <= 2.3.0)
       uber
+    erbse (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
@@ -192,6 +196,8 @@ GEM
       uber (~> 0.0.11)
     representable (2.3.0)
       uber (~> 0.0.7)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     roar (1.0.1)
       representable (>= 2.0.1, <= 3.0.0)
     ruby-progressbar (1.7.5)
@@ -206,6 +212,9 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     shellany (0.0.1)
+    simple_form (3.1.1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     slop (3.6.0)
     spring (1.3.6)
     sprockets (3.3.4)
@@ -246,6 +255,7 @@ DEPENDENCIES
   byebug
   caracara!
   cells
+  cells-erb
   coffee-rails (~> 4.1.0)
   guard
   guard-minitest
@@ -259,9 +269,11 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails_12factor
   reform
+  responders
   roar
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form
   spring
   sqlite3
   trailblazer

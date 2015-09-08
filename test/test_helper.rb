@@ -9,6 +9,15 @@ require "pp"
 
 Rails.backtrace_cleaner.remove_silencers!
 
+MiniTest::Spec.class_eval do
+  after :each do
+    # DatabaseCleaner.clean
+    App.delete_all
+    Host.delete_all
+    Key.delete_all
+  end
+end
+
 # minitest-reporters
 require "minitest/reporters"
 Minitest::Reporters.use!

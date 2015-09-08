@@ -7,6 +7,20 @@ class InitialMigrations < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :hosts do |t|
+      t.string :name
+      t.string :address
+      t.string :sys_user
+      t.string :source
+      t.references :key, index: true
+    end
+
+    create_table :keys do |t|
+      t.string :name
+      t.string :value
+      t.timestamps
+    end
+
     # create_table :users do |t|
     #   t.string :email, limit: 255
     #   t.string :password_digest, limit: 255
@@ -21,12 +35,6 @@ class InitialMigrations < ActiveRecord::Migration
     #   t.text :key
     #   t.text :value
     #   t.timestamps
-    # end
-    #
-    # create_table :hosts do |t|
-    #   t.string :name
-    #   t.string :address
-    #   t.references :key, index: true
     # end
     #
     # create_table :task_logs do |t|
@@ -45,12 +53,6 @@ class InitialMigrations < ActiveRecord::Migration
     #   t.string :name
     #   t.string :desc
     #   t.text :script
-    #   t.timestamps
-    # end
-    #
-    # create_table :keys do |t|
-    #   t.string :name
-    #   t.string :value
     #   t.timestamps
     # end
     #

@@ -15,15 +15,13 @@ class AppCrudTest < MiniTest::Spec
         rails server
       STRING
 
-      res, operation = App::Create.run(
+      app = App::Create.(
         app: {
           name: "Test App",
           git: "git@bitbucket.org:yebo-dev/sandbox.git",
           script: script
         }
-      )
-
-      app = operation.model
+      ).model
 
       app.persisted?.must_equal true
       app.name.must_equal "Test App"
@@ -40,9 +38,7 @@ class AppCrudTest < MiniTest::Spec
         }
       )
 
-      # Response false means it failed
       res.must_equal false
-
       # Validates Operation
       op.errors.to_s.must_equal "{:git=>[\"is invalid\"], :name=>[\"is too short (minimum is 6 characters)\"]}"
       op.model.persisted?.must_equal false
@@ -56,15 +52,14 @@ class AppCrudTest < MiniTest::Spec
     end
 
     it "saves valid git" do
-      res, op = App::Create.run(app: {name: "Test App", git: "git@bitbucket.org:yebo-dev/sandbox.git"})
+      op = App::Create.(app: {name: "Test App", git: "git@bitbucket.org:yebo-dev/sandbox.git"})
 
-      res.must_equal true
       op.errors.to_s.must_equal "{}"
     end
   end
 
   describe "Update" do
-    let (:app) { App::Create.call(app: {
+    let (:created_app) { App::Create.(app: {
       name: "Test App",
       git: "git@bitbucket.org:yebo-dev/sandbox.git",
       script: <<-STRING
@@ -74,21 +69,19 @@ class AppCrudTest < MiniTest::Spec
     }).model }
 
     it "has a app alredy" do
-      app.name.must_equal "Test App"
-      app.git.must_equal "git@bitbucket.org:yebo-dev/sandbox.git"
+      created_app.name.must_equal "Test App"
+      created_app.git.must_equal "git@bitbucket.org:yebo-dev/sandbox.git"
     end
 
     it "persists valid" do
-      res, op = App::Update.run(
-        id: app.id,
+      app = App::Update.(
+        id: created_app.id,
         app: { name: "New App Test", git: "git@bitbucket.org:yebo-dev/not-sandbox.git" }
-      )
+      ).model
 
-      res.must_equal true
-
-      op.model.reload
-      op.model.name.must_equal "New App Test"
-      op.model.git.must_equal "git@bitbucket.org:yebo-dev/not-sandbox.git"
+      app.reload
+      app.name.must_equal "New App Test"
+      app.git.must_equal "git@bitbucket.org:yebo-dev/not-sandbox.git"
     end
   end
 
@@ -102,38 +95,36 @@ class AppCrudTest < MiniTest::Spec
 
   describe "show" do
     it "sees a app that alredy exists" do
-      res, op = App::Create.run(
+      app1 = App::Create.(
         app: {
           name: "Test App",
           git: "git@bitbucket.org:yebo-dev/sandbox.git",
           script: ""
         }
-      )
+      ).model
 
-      op = App::Show.present(op.model)
+      app2 = App::Show.present(app1).model
 
-      app = op.model
-
-      app.name.must_equal "Test App"
-      app.git.must_equal "git@bitbucket.org:yebo-dev/sandbox.git"
+      app2.name.must_equal "Test App"
+      app2.git.must_equal "git@bitbucket.org:yebo-dev/sandbox.git"
     end  # It
   end # Describe Show
 
   describe "destroy" do
     it "delete a alterdy existing app" do
-      res, op = App::Create.run(
+      app1 = App::Create.(
         app: {
           name: "Test App",
           git: "git@bitbucket.org:yebo-dev/sandbox.git",
           script: ""
         }
-      )
+      ).model
 
-      op.model.persisted?.must_equal true
+      app1.persisted?.must_equal true
 
-      res, op = App::Destroy.run(op.model)
+      app2 = App::Destroy.(app1).model
 
-      op.model.persisted?.must_equal false
+      app2.persisted?.must_equal false
     end  # It
   end # Destroy
 end # AppCrud

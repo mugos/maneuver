@@ -1,3 +1,3 @@
 class Host < ActiveRecord::Base
-  has_many :keys
+  belongs_to :key
 end

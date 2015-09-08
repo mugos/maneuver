@@ -2,7 +2,14 @@ require 'test_helper'
 
 class KeyCrudTest < MiniTest::Spec
   before do
-    @valid_ssh = "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
+    @valid_ssh =  <<-STRING
+      ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU
+      GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3
+      Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA
+      t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En
+      mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
+      NrRFi9wrf+M7Q== server@server.local
+    STRING
   end
 
   describe "Create" do
@@ -13,7 +20,7 @@ class KeyCrudTest < MiniTest::Spec
       })
 
       key = op.model
-      key.persisted? true
+      key.persisted?.must_equal true
       key.name.must_equal "Key Name"
       key.value.must_equal @valid_ssh
     end
@@ -25,38 +32,38 @@ class KeyCrudTest < MiniTest::Spec
       })
 
       key = op.model
-      key.persisted? false
-      key.errors.blank?.must_equal false
+
+      key.persisted?.must_equal false
     end
   end
 
   describe "Update" do
-    let(:key) { Key::Create[key: {name: "Old Key Name", value: @valid_ssh}] }
+    let(:persisted) { Key::Create.(key: { name: "Old Key Name", value: @valid_ssh }).model }
 
     it "pesists valid" do
-      key = Key::Update[
-        id: key.id,
+      res, op = Key::Update.run(
+        id: persisted.id,
         key: {
           name: "New Key Name",
           value: @valid_ssh
-      }].model
+      })
 
-      key.persisted? true
+      key = op.model
+
+      key.persisted?.must_equal true
       key.name.must_equal "New Key Name"
       key.value.must_equal @valid_ssh
     end
 
     it "invalid" do
-      key = Key::Update[
-        id: key.id,
+      res, op = Key::Update.run(
+        id: persisted.id,
         key: {
           name: "",
           value: "Invalid SSH"
-      }].model
+      })
 
-      key.persisted? false
-      key.errors.blank?.must_equal false
+      res.must_equal false
     end
-
   end
 end

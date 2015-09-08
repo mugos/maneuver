@@ -1,0 +1,16 @@
+<div class="header">
+  <h3>Edit App</h3>
+  <%= link_to "Home", root_path %>
+</div>
+
+<%= simple_form_for model do |f| %>
+  <%= f.input :name, placeholder: "Name", label: false %>
+  <%= f.input :git, placeholder: "Git", label: false %>
+  <%= f.input :script, placeholder: "Script", label: false %>
+
+  <%= f.button :submit, class: :expand %>
+<% end %>
+
+<div class="errors">
+  <span>Errors: <%= model.errors.messages %></span>
+</div>
