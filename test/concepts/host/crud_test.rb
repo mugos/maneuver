@@ -1,13 +1,5 @@
 require 'test_helper'
 
-class TestApp
-  class << self
-    def running?
-      false
-    end
-  end
-end
-
 class HostCrudTest < MiniTest::Spec
   let (:key) { Key::Create.(key: {
     name: "SSH Key Name",
@@ -22,10 +14,6 @@ class HostCrudTest < MiniTest::Spec
   }).model }
 
   describe "Create" do
-    it "check for test server runnig" do
-      TestApp.running?
-    end
-
     it "rendering" do # DISCUSS: not sure if that will stay here, but i like the idea of presentation/logic in one place.
       form = Host::Create.present({}).contract
       form.prepopulate! # this is a bit of an API breach.
@@ -44,7 +32,7 @@ class HostCrudTest < MiniTest::Spec
           address: "http://teste.com.br",
           sys_user: "root",
           source: "~/source/application",
-          key: { id: key.id, carlos: "carlos" }
+          key: { id: key.id }
         }
       ).model
 

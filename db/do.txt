@@ -1,0 +1,4 @@
+docker-compose run maneuver rake db:create RAILS_ENV=development
+docker-compose run maneuver rake db:migrate RAILS_ENV=development
+docker-compose run maneuver rake db:create RAILS_ENV=test
+docker-compose run maneuver rake db:migrate RAILS_ENV=test

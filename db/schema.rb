@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.datetime "updated_at"
   end
 
+  create_table "apps_hosts", id: false, force: :cascade do |t|
+    t.integer "app_id",  null: false
+    t.integer "host_id", null: false
+  end
+
   create_table "hosts", force: :cascade do |t|
     t.string  "name"
     t.string  "address"

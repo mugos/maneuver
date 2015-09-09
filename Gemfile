@@ -34,6 +34,8 @@ gem 'trailblazer'
 gem 'cells'
 # Because of well
 gem "cells-erb"
+# Because of well well
+# gem 'cells-haml'
 # Form objects decoupled from models.
 gem 'reform'
 # Parse and render REST API documents using representers.

@@ -13,10 +13,26 @@ class App
       property :git
       property :script
 
-      validates :name, length: { in: 6..160 }
+      collection :hosts, prepopulator: :prepopulate_hosts!, populate_if_empty: :populator_hosts! do
+        property :id
+      end
+
+      validates :name, length: { in: 1..30 }
       validate :git_repo?
 
       private
+      def prepopulate_hosts!(options)
+        pp '----- PREPOPULATE'
+        pp options
+        self.hosts << Host.new
+      end
+
+      def populator_hosts!(params, options)
+        pp '===== POPULATOR'
+        pp params
+        pp options
+        # self.hosts << Host.find(params[:id])
+      end
 
       def git_repo?
         if git =~ URI::regexp
@@ -30,8 +46,9 @@ class App
 
   class Create < Show
     action :create
-
     def process(params)
+      # pp params
+      # pp params[:app][:hosts][:id]
       validate(params[:app]) do |f|
         f.save
       end

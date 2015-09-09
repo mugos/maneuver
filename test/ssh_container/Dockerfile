@@ -1,8 +1,19 @@
+# sshd
+#
+# VERSION               0.0.2
+
 FROM ubuntu:14.04
+MAINTAINER Sven Dowideit <SvenDowideit@docker.com>
+
+COPY ["./ssh", "/root/.ssh"]
+RUN touch /root/.ssh/authorized_keys
+RUN cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+RUN chmod 600 /root/.ssh/authorized_keys
+RUN chmod 700 /root/.ssh/id_rsa
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo 'root:testpassword' | chpasswd
+RUN echo 'root:test' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login

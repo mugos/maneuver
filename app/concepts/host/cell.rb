@@ -5,13 +5,13 @@ class Host::Cell < Cell::Concept
   property :sys_user
   property :address
   property :source
-  property :key
+  property :key  
 
   def show
     render
   end
 
-  def link_to_name
+  def name_link
     link_to "#{model.id} - #{model.name}", host_path(model)
   end
 

@@ -1,32 +1,35 @@
 require 'trb/cell/grid_cell.rb'
 
 class App::Cell < Cell::Concept
-  include ::Cell::Erb
+  include Cell::Erb
+  # include Cell::Haml
   include Cell::GridCell
 
   self.classes = ["box", "large-3", "columns"]
-
-  property :id
-  property :name
-  property :git
-  property :script
-
-  def link_to_name
-    link_to "#{model.id} - #{model.name}", app_path(model)
-  end
 
   def show
     render
   end
 
-  private
+  property :contract
 
   def name_link
-    link_to name, app_path(model)
+    link_to "#{model.id} - #{model.name}", app_path(model)
+  end
+
+  class Form < App::Cell
+    include ActionView::RecordIdentifier
+    include SimpleForm::ActionViewExtensions::FormHelper
+
+    inherit_views App::Cell
+
+    def show
+      render :form
+    end
   end
 
   # The public helper that collects latest apps and renders the grid.
-  class Grid < Cell::Concept
+  class Grid < App::Cell
     include Cell::Caching::Notifications
 
     cache :show do

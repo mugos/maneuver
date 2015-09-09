@@ -58,6 +58,6 @@ class AppsController < ApplicationController
   private
 
   def render_form
-    render text: concept("app/cell/form", @form), layout: true
+    render text: concept("app/cell/form", @operation), layout: true
   end
 end

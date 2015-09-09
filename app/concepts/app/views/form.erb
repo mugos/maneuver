@@ -3,10 +3,13 @@
   <%= link_to "Home", root_path %>
 </div>
 
-<%= simple_form_for model do |f| %>
+<%= simple_form_for contract do |f| %>
   <%= f.input :name, placeholder: "Name", label: false %>
   <%= f.input :git, placeholder: "Git", label: false %>
   <%= f.input :script, placeholder: "Script", label: false %>
+  <%= f.simple_fields_for :hosts do |h| %>
+    <%= h.collection_check_boxes :id, Host.all, :id, :name %>  
+  <% end %>
 
   <%= f.button :submit, class: :expand %>
 <% end %>

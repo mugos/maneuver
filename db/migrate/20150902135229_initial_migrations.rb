@@ -21,6 +21,8 @@ class InitialMigrations < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_join_table :apps, :hosts
+
     # create_table :users do |t|
     #   t.string :email, limit: 255
     #   t.string :password_digest, limit: 255
