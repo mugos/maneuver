@@ -19,11 +19,12 @@ class App::Cell < Cell::Concept
   class Form < App::Cell
     include ActionView::RecordIdentifier
     include SimpleForm::ActionViewExtensions::FormHelper
+    include ActionView::Helpers::FormOptionsHelper
 
     inherit_views App::Cell
 
-    def hosts
-      Host.all
+    def hosts_check_boxes(form)
+      form.collection_check_boxes :hosts, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }
     end
 
     def show

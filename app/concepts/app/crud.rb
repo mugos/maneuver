@@ -13,8 +13,13 @@ class App
       property :git
       property :script
 
+      # collection :hosts, prepopulator: :prepopulate_hosts!, populate_if_empty: :populator_hosts! do
+      #   property :id
+      # end
+
       collection :hosts, prepopulator: :prepopulate_hosts!, populate_if_empty: :populator_hosts! do
         property :id
+        property :name
       end
 
       validates :name, length: { in: 1..30 }
@@ -22,16 +27,19 @@ class App
 
       private
       def prepopulate_hosts!(options)
-        pp '----- PREPOPULATE'
-        pp options
-        self.hosts << Host.new
+        ap '---------------- PREPOPULATOR'
+        pp hosts
+        ap '-----------------'
+        # self.hosts << Host.new
       end
 
       def populator_hosts!(params, options)
-        pp '===== POPULATOR'
-        pp params
-        pp options
-        # self.hosts << Host.find(params[:id])
+        # pp '---------------- POPULATOR'
+        # pp params
+        # pp params[:id]
+        # pp params[:id].reject!(&:blank?)
+        # pp '===================='
+        self.hosts << Host.find(params[:id])
       end
 
       def git_repo?
@@ -46,9 +54,12 @@ class App
 
   class Create < Show
     action :create
+
     def process(params)
-      # pp params
-      # pp params[:app][:hosts][:id]
+      pp 'params in process ==============='
+      pp params
+      pp '=================================='
+      abort
       validate(params[:app]) do |f|
         f.save
       end

@@ -1,6 +1,24 @@
 require 'test_helper'
 
 class AppCrudTest < MiniTest::Spec
+  describe "Nested Association" do
+    it "persists valid hosts" do
+      script = <<-STRING
+        bundle install
+        rails server
+      STRING
+
+      app = App::Create.(app: {
+        name: "asdas",
+        git: "https://bitbucket.org/yebo-dev/sandbox.git",
+        script: "asdasd",
+        hosts:  { id: ["1", "2", "3"] }
+      }).model
+
+      app.hosts.any?.must_equal true
+    end
+  end
+
   describe "Create" do
     it "rendering" do # DISCUSS: not sure if that will stay here, but i like the idea of presentation/logic in one place.
       form = App::Create.present({}).contract
