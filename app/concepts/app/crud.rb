@@ -3,6 +3,7 @@ require 'uri'
 class App
   class Show < Trailblazer::Operation
     include CRUD
+
     # include Responder
     model App, :find
 
@@ -13,11 +14,7 @@ class App
       property :git
       property :script
 
-      # collection :hosts, prepopulator: :prepopulate_hosts!, populate_if_empty: :populator_hosts! do
-      #   property :id
-      # end
-
-      collection :hosts, prepopulator: :prepopulate_hosts!, populate_if_empty: :populator_hosts! do
+      collection :hosts, populate_if_empty: :populator_hosts!, skip_if: :all_blank do
         property :id
         property :name
       end
@@ -26,20 +23,9 @@ class App
       validate :git_repo?
 
       private
-      def prepopulate_hosts!(options)
-        ap '---------------- PREPOPULATOR'
-        pp hosts
-        ap '-----------------'
-        # self.hosts << Host.new
-      end
 
       def populator_hosts!(params, options)
-        # pp '---------------- POPULATOR'
-        # pp params
-        # pp params[:id]
-        # pp params[:id].reject!(&:blank?)
-        # pp '===================='
-        self.hosts << Host.find(params[:id])
+        Host.find(params[:id]) || Host.new
       end
 
       def git_repo?
@@ -56,10 +42,10 @@ class App
     action :create
 
     def process(params)
-      pp 'params in process ==============='
-      pp params
-      pp '=================================='
-      abort
+      # TODO Search the right way of doing this
+      # It trows a error if there is no key
+      params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
+
       validate(params[:app]) do |f|
         f.save
       end
