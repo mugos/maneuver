@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem "rails", "4.2.0"
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SqLite for development
@@ -31,11 +31,15 @@ gem "simple_form"
 # Trailblazer
 gem 'trailblazer'
 # View components for Ruby and Rails
-gem 'cells'
+gem "cells", "4.0.2"
 # Because of well
 gem "cells-erb"
 # Because of well well
-# gem 'cells-haml'
+gem "cells-haml", "0.0.8"
+# Haml
+gem "haml", github: "haml/haml", ref: "7c7c169"
+# Haml Rails
+gem "haml-rails"
 # Form objects decoupled from models.
 gem 'reform'
 # Parse and render REST API documents using representers.

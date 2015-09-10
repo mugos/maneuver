@@ -8,7 +8,7 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 RUN gem install bundler --no-ri --no-rdoc
 
 # Install Rails
-RUN gem install rails --no-ri --no-rdoc
+RUN gem install rails -v 4.2.0 --no-ri --no-rdoc
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME

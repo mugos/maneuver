@@ -1,8 +1,8 @@
 require 'trb/cell/grid_cell.rb'
 
 class App::Cell < Cell::Concept
-  include Cell::Erb
-  # include Cell::Haml
+  # include Cell::Erb
+  include Cell::Haml
   include Cell::GridCell
 
   self.classes = ["box", "large-3", "columns"]
@@ -22,6 +22,10 @@ class App::Cell < Cell::Concept
     include SimpleForm::ActionViewExtensions::FormHelper
 
     inherit_views App::Cell
+
+    def hosts
+      Host.all
+    end
 
     def show
       render :form

@@ -8,7 +8,7 @@
   <%= f.input :git, placeholder: "Git", label: false %>
   <%= f.input :script, placeholder: "Script", label: false %>
   <%= f.simple_fields_for :hosts do |h| %>
-    <%= h.collection_check_boxes :id, Host.all, :id, :name %>  
+    <%= h.collection_check_boxes :id, hosts, :id, :name %>
   <% end %>
 
   <%= f.button :submit, class: :expand %>
