@@ -1,0 +1,8 @@
+.header
+  %h1= @host.name
+  = link_to "Edit", edit_host_path(@host)
+  = link_to "Delete", host_path(@host), method: :delete
+  = link_to "Home", root_path
+.row
+  = concept "host/cell", @host
+%hr

@@ -1,0 +1,8 @@
+.header
+  %h1= @key.name
+  = link_to "Edit", edit_key_path(@key)
+  = link_to "Delete", key_path(@key), method: :delete
+  = link_to "Home", root_path
+.row
+  = @key.value
+%hr

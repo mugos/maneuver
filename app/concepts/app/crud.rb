@@ -14,26 +14,15 @@ class App
       property :git
       property :script
 
-      collection :hosts, populate_if_empty: :populator_hosts!, skip_if: :all_blank do
+      collection :hosts, populator: :populator_hosts!, populate_if_empty: Host, skip_if: :all_blank do
         property :id
         property :name
       end
-
-      validates :name, length: { in: 1..30 }
-      validate :git_repo?
 
       private
 
       def populator_hosts!(params, options)
         Host.find(params[:id]) || Host.new
-      end
-
-      def git_repo?
-        if git =~ URI::regexp
-            true
-        else
-          errors.add("git", "is invalid")
-        end
       end
     end
   end

@@ -1,0 +1,11 @@
+.header
+  %h1= @app.name
+  = link_to "Edit", edit_app_path(@app)
+  = link_to "Delete", app_path(@app), method: :delete
+  = link_to "Home", root_path
+.row
+  %h3 Hosts
+  = @app.hosts.each do |host|
+    = concept "host/cell", host
+
+%hr
