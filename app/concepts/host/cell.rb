@@ -1,29 +1,25 @@
 class Host::Cell < Cell::Concept
   include Cell::Haml
 
-  property :name
-  property :sys_user
-  property :address
-  property :source
-  property :key
-
   def show
     render
   end
+
+  property :contract
 
   def name_link
     link_to "#{model.id} - #{model.name}", host_path(model)
   end
 
-  class Form < Cell::Concept
+  class Form < Host::Cell
     inherit_views Host::Cell
 
     include ActionView::RecordIdentifier
     include SimpleForm::ActionViewExtensions::FormHelper
     include ActionView::Helpers::FormOptionsHelper
 
-    def keys
-      Key.all.map { |r| [r.name, r.id] }
+    def key_select_box(form)
+      form.collection_select :key, Key.all, :id, :name, { include_blank: true, checked: contract.key.id }
     end
 
     def show

@@ -19,20 +19,20 @@ class Host
       # For authentication
       validates :name, presence: true
 
-      # TODO: Validate if is a valid ssh
-      property :key,
-        # populate_if_empty: -> (fragment, *) { self.key =  Key.new } do
-        prepopulator: -> (*) { self.key = Key.new },
-        populator: -> (fragment, *) { self.key = Key.find(fragment[:id]) || Key.new } do
-
+      property :key, prepopulator: :prepopulate_key!, populate_if_empty: :populator_key! do
+        property :id
         property :name
-        # Validates if valid ssh key
-        property :value
       end
-    end
 
-    def key
-      model.key
+      private
+
+      def prepopulate_key!(options)
+        self.key = Key.new
+      end
+
+      def populator_key!(params, options)
+        Key.find(params[:id]) || Key.new
+      end
     end
   end
 
@@ -40,6 +40,15 @@ class Host
     action :create
 
     def process(params)
+      # TODO Search the right way of doing this
+      # It trows a error if there is no key
+      # Little hack till i can't figure out how to send things nested
+      params[:host][:key] = { id: params[:host][:key] }
+
+      pp '-----------'
+      pp params
+      pp '-----------'
+
       validate(params[:host]) do |f|
         f.save
       end

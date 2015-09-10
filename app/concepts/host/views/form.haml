@@ -1,12 +1,13 @@
 .header
   %h3 Edit Host
   = link_to "Home", root_path
-- simple_form_for model do |f|
+= simple_form_for contract do |f|
   = f.input :name, placeholder: "name", label: false
   = f.input :sys_user, placeholder: "sys_user", label: false
   = f.input :address, placeholder: "address", label: false
   = f.input :source, placeholder: "source", label: false
-  = collection_select :key, :id, Key.all, :id, :name
+
+  = key_select_box f
   = f.button :submit, class: :expand
 .errors
   %span

@@ -1,7 +1,7 @@
 .header
   %h3 Edit Key
   = link_to "Home", root_path
-- simple_form_for model do |f|
+= simple_form_for contract do |f|
   = f.input :name, placeholder: "name", label: false
   = f.input :value, placeholder: "value", label: false
   = f.button :submit, class: :expand

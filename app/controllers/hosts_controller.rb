@@ -58,6 +58,6 @@ class HostsController < ApplicationController
   private
 
   def render_form
-    render text: concept("host/cell/form", @form), layout: true
+    render text: concept("host/cell/form", @operation), layout: true
   end
 end

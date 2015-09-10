@@ -58,6 +58,6 @@ class KeysController < ApplicationController
   private
 
   def render_form
-    render text: concept("key/cell/form", @form), layout: true
+    render text: concept("key/cell/form", @operation), layout: true
   end
 end

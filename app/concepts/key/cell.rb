@@ -8,7 +8,9 @@ class Key::Cell < Cell::Concept
     render
   end
 
-  class Form < Cell::Concept
+  property :contract
+
+  class Form < Key::Cell
     inherit_views Key::Cell
 
     include ActionView::RecordIdentifier
