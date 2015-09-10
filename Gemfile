@@ -32,8 +32,6 @@ gem "simple_form"
 gem 'trailblazer'
 # View components for Ruby and Rails
 gem "cells", "4.0.2"
-# Because of well
-gem "cells-erb"
 # Because of well well
 gem "cells-haml", "0.0.8"
 # Haml

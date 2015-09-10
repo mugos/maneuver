@@ -1,7 +1,6 @@
 require 'trb/cell/grid_cell.rb'
 
 class App::Cell < Cell::Concept
-  # include Cell::Erb
   include Cell::Haml
   include Cell::GridCell
 

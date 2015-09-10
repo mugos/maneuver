@@ -67,9 +67,6 @@ GEM
     cells (4.0.2)
       tilt (>= 1.4, < 3)
       uber (~> 0.0.9)
-    cells-erb (0.0.6)
-      cells (~> 4.0.0.beta6)
-      erbse (>= 0.0.2)
     cells-haml (0.0.8)
       cells (~> 4.0.0.beta6)
       haml (>= 4.1.0.beta.1)
@@ -85,7 +82,6 @@ GEM
     disposable (0.1.12)
       representable (>= 2.2.3, <= 2.3.0)
       uber
-    erbse (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
@@ -284,7 +280,6 @@ DEPENDENCIES
   byebug
   caracara!
   cells (= 4.0.2)
-  cells-erb
   cells-haml (= 0.0.8)
   coffee-rails (~> 4.1.0)
   guard

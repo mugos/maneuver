@@ -1,5 +1,5 @@
 class Key::Cell < Cell::Concept
-  include Cell::Erb
+  include Cell::Haml
 
   property :name
   property :value

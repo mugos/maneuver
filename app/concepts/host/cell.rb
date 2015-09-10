@@ -1,11 +1,11 @@
 class Host::Cell < Cell::Concept
-  include Cell::Erb
+  include Cell::Haml
 
   property :name
   property :sys_user
   property :address
   property :source
-  property :key  
+  property :key
 
   def show
     render
