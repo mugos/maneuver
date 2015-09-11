@@ -4,9 +4,12 @@ class App
   class Show < Trailblazer::Operation
     include CRUD
 
+    # include Responder
     model App, :find
 
     contract do
+      # include Reform::Form::ModelReflections
+
       property :name
       property :git
       property :script
@@ -19,12 +22,11 @@ class App
 
       private
 
-      def populator_hosts!(params, options)
+      def populator_hosts!(fragment, *)
         pp '---------- 2'
-        pp params
-        pp options
+        pp fragment
         pp '---------- 2'
-        Host.find(params[:id]) || Host.new
+        Host.find(fragment[:id]) || Host.new
       end
     end
   end
