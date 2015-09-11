@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/apotonick/reform.git
+  revision: 3d1b563fc83461235bb135b999a1113cf7e2451b
+  specs:
+    reform (2.0.3)
+      disposable (~> 0.1.9)
+      uber (~> 0.0.11)
+
+GIT
   remote: git://github.com/gabrielcorado/caracara.git
   revision: 85dee5c613f1d64d5386067d840ffa06e26b585b
   specs:
@@ -210,9 +218,6 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
-    reform (2.0.4)
-      disposable (~> 0.1.11)
-      uber (~> 0.0.11)
     representable (2.3.0)
       uber (~> 0.0.7)
     responders (2.1.0)
@@ -297,7 +302,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   rails_12factor
-  reform (= 2.0.4)
+  reform!
   responders
   roar
   sass-rails (~> 5.0)

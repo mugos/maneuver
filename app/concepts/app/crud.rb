@@ -4,31 +4,27 @@ class App
   class Show < Trailblazer::Operation
     include CRUD
 
-    # include Responder
     model App, :find
 
     contract do
-      # include Reform::Form::ModelReflections
-
       property :name
       property :git
       property :script
 
-      collection :hosts, populator: :populator_hosts!, populate_if_empty: Host, skip_if: :all_blank do
+      # , populate_if_empty: Host, skip_if: :all_blank
+      collection :hosts, populator: :populator_hosts! do
         property :id
         property :name
       end
 
       private
 
-      def populator_hosts!(fragment, collection, index, options)
-        pp '----------'
-        pp fragment
-        pp collection
-        pp index
+      def populator_hosts!(params, options)
+        pp '---------- 2'
+        pp params
         pp options
-        pp '----------'
-        Host.find(fragment[:id]) || self.hosts << Host.new
+        pp '---------- 2'
+        Host.find(params[:id]) || Host.new
       end
     end
   end
@@ -41,7 +37,10 @@ class App
       # It trows a error if there is no key
       params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
 
+      pp '---------- 1'
       pp params
+      pp '---------- 1'
+
       validate(params[:app]) do |f|
         f.save
       end
