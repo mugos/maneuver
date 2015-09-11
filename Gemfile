@@ -39,7 +39,7 @@ gem "haml", github: "haml/haml", ref: "7c7c169"
 # Haml Rails
 gem "haml-rails"
 # Form objects decoupled from models.
-gem 'reform'
+gem "reform", "2.0.4"
 # Parse and render REST API documents using representers.
 gem 'roar'
 # Monban is rails authentication made simple.

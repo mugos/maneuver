@@ -21,8 +21,14 @@ class App
 
       private
 
-      def populator_hosts!(params, options)
-        Host.find(params[:id]) || Host.new
+      def populator_hosts!(fragment, collection, index, options)
+        pp '----------'
+        pp fragment
+        pp collection
+        pp index
+        pp options
+        pp '----------'
+        Host.find(fragment[:id]) || self.hosts << Host.new
       end
     end
   end
@@ -35,6 +41,7 @@ class App
       # It trows a error if there is no key
       params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
 
+      pp params
       validate(params[:app]) do |f|
         f.save
       end

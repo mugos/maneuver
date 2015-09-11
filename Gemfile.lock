@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/gabrielcorado/caracara.git
-  revision: bca1ef6fbe60b1c79c0fcf0e02c196821bc704e3
+  revision: 85dee5c613f1d64d5386067d840ffa06e26b585b
   specs:
-    caracara (0.4.0)
+    caracara (0.4.1)
       mustache (~> 1.0)
 
 GIT
@@ -297,7 +297,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   rails_12factor
-  reform
+  reform (= 2.0.4)
   responders
   roar
   sass-rails (~> 5.0)
