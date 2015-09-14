@@ -2,8 +2,21 @@ class InitialMigrations < ActiveRecord::Migration
   def change
     create_table :apps do |t|
       t.string :name
-      t.string :git
       t.text :script
+      t.timestamps
+    end
+
+    create_table :gits do |t|
+      t.string :url
+      t.string :user_name
+      t.string :repo_name
+      t.string :request_token
+      t.string :request_secret
+      t.string :consumer_key
+      t.string :consumer_secret
+      t.string :net_http
+      t.integer :repo_type, default: 0
+      t.references :app, index: true
       t.timestamps
     end
 
@@ -13,6 +26,7 @@ class InitialMigrations < ActiveRecord::Migration
       t.string :sys_user
       t.string :source
       t.references :key, index: true
+      t.timestamps
     end
 
     create_table :keys do |t|

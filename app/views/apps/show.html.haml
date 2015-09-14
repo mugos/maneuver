@@ -5,7 +5,13 @@
   = link_to "Home", root_path
 .row
   %h3 Hosts
-  = @app.hosts.each do |host|
+  - @app.hosts.each do |host|
     = concept "host/cell", host
 
-%hr
+.row
+  %h3 Git
+  = concept "git/cell", @app.git
+
+
+.row
+  = link_to "Deploy"

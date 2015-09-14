@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20150902135229) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
-    t.string   "git"
     t.text     "script"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -25,6 +24,23 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.integer "app_id",  null: false
     t.integer "host_id", null: false
   end
+
+  create_table "gits", force: :cascade do |t|
+    t.string   "url"
+    t.string   "user_name"
+    t.string   "repo_name"
+    t.string   "request_token"
+    t.string   "request_secret"
+    t.string   "consumer_key"
+    t.string   "consumer_secret"
+    t.string   "net_http"
+    t.integer  "repo_type",       default: 0
+    t.integer  "app_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "gits", ["app_id"], name: "index_gits_on_app_id"
 
   create_table "hosts", force: :cascade do |t|
     t.string  "name"

@@ -48,6 +48,8 @@ gem 'monban'
 gem 'tyrant'
 # Task Runner
 gem 'caracara', github: 'gabrielcorado/caracara'
+# A Ruby wrapper for the BitBucket REST API
+gem "bitbucket_rest_api"
 
 group :production do
   gem 'rails_12factor'

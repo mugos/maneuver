@@ -10,30 +10,39 @@ class App::Cell < Cell::Concept
     render
   end
 
-  property :contract
-
   def name_link
     link_to "#{model.id} - #{model.name}", app_path(model)
   end
 
-  class Form < App::Cell
+  class Form < Cell::Concept
+    inherit_views App::Cell
+
+    # include Reform::Form::ActiveModel
+    # include Reform::Form::ActiveModel::FormBuilderMethods
     include ActionView::RecordIdentifier
     include SimpleForm::ActionViewExtensions::FormHelper
     include ActionView::Helpers::FormOptionsHelper
 
-    inherit_views App::Cell
+    def show
+      render :form
+    end
+
+    private
+
+    property :contract
+
+    def git_select_boxes(form)
+      # select_tag 'app[git][repo_type]', options_for_select([['Bitbucket', 0], ['Github', 1]])
+      form.select :repo_type, [['Bitbucket', 0], ['Github', 1]]#, { checked: contract.git.id }
+    end
 
     def hosts_check_boxes(form)
       form.collection_check_boxes :hosts, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }
     end
-
-    def show
-      render :form
-    end
   end
 
   # The public helper that collects latest apps and renders the grid.
-  class Grid < App::Cell
+  class Grid < Cell::Concept
     include Cell::Caching::Notifications
 
     cache :show do

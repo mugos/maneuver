@@ -14,19 +14,20 @@ class App
       property :git
       property :script
 
-      # , populate_if_empty: Host, skip_if: :all_blank
-      collection :hosts, populator: :populator_hosts! do
+      # PREPOPULATORS are a concept designed to prepare a form for rendering,
+      # whereas POPULATORS are meant to set up the form in *validate when the input hash is deserialized.
+      collection :hosts,
+          populator: ->(fragment, collection, index, options) { (item = collection[index]) ? item : collection.insert(index, Host.find(fragment[:id])) } do
         property :id
         property :name
       end
 
-      private
-
-      def populator_hosts!(fragment, *)
-        pp '---------- 2'
-        pp fragment
-        pp '---------- 2'
-        Host.find(fragment[:id]) || Host.new
+      property :git,
+          prepopulator: ->(*) { self.git = model.git || Git.new },
+          populator: ->(fragment, model, options) { model || self.git = Git.find_by_id(fragment[:id]) || Git.new } do
+        property :id
+        property :url
+        property :repo_type
       end
     end
   end
@@ -35,17 +36,24 @@ class App
     action :create
 
     def process(params)
-      # TODO Search the right way of doing this
-      # It trows a error if there is no key
-      params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
-
-      pp '---------- 1'
-      pp params
-      pp '---------- 1'
-
       validate(params[:app]) do |f|
         f.save
       end
+    end
+
+    private
+
+    def setup_model!(params)
+      # TODO: not sure if this should be here either
+      return unless params[:app]
+
+      # TODO: Search the right way of doing this
+      # It trows a error if there is no key
+      params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
+
+      # TODO: Is this the right thing
+      # This is here becase populator does not remove from relation
+      model.hosts = []
     end
   end
 
