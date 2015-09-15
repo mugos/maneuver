@@ -19,19 +19,11 @@ class Host
       # For authentication
       validates :name, presence: true
 
-      property :key, prepopulator: :prepopulate_key!, populate_if_empty: :populator_key! do
+      property :key,
+          prepopulator: ->(*) { self.key = model.key || Key.new },
+          populator: ->(fragment, model, options) { model || self.key = Key.find_by_id(fragment[:id]) || Key.new } do
         property :id
         property :name
-      end
-
-      private
-
-      def prepopulate_key!(options)
-        self.key = Key.new
-      end
-
-      def populator_key!(params, options)
-        Key.find(params[:id]) || Key.new
       end
     end
   end
@@ -40,15 +32,6 @@ class Host
     action :create
 
     def process(params)
-      # TODO Search the right way of doing this
-      # It trows a error if there is no key
-      # Little hack till i can't figure out how to send things nested
-      params[:host][:key] = { id: params[:host][:key] }
-
-      pp '-----------'
-      pp params
-      pp '-----------'
-
       validate(params[:host]) do |f|
         f.save
       end

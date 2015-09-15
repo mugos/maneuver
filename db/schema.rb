@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.string   "url"
     t.string   "user_name"
     t.string   "repo_name"
-    t.string   "request_token"
-    t.string   "request_secret"
-    t.string   "consumer_key"
-    t.string   "consumer_secret"
-    t.string   "net_http"
-    t.integer  "repo_type",       default: 0
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
+    t.string   "client_id"
+    t.string   "client_secret"
+    t.string   "adapter"
+    t.integer  "repo_type",     default: 0
     t.integer  "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,11 +43,13 @@ ActiveRecord::Schema.define(version: 20150902135229) do
   add_index "gits", ["app_id"], name: "index_gits_on_app_id"
 
   create_table "hosts", force: :cascade do |t|
-    t.string  "name"
-    t.string  "address"
-    t.string  "sys_user"
-    t.string  "source"
-    t.integer "key_id"
+    t.string   "name"
+    t.string   "address"
+    t.string   "sys_user"
+    t.string   "source"
+    t.integer  "key_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "hosts", ["key_id"], name: "index_hosts_on_key_id"

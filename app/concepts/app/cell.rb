@@ -30,11 +30,11 @@ class App::Cell < Cell::Concept
     private
 
     property :contract
-
-    def git_select_boxes(form)
-      # select_tag 'app[git][repo_type]', options_for_select([['Bitbucket', 0], ['Github', 1]])
-      form.select :repo_type, [['Bitbucket', 0], ['Github', 1]]#, { checked: contract.git.id }
-    end
+    # 
+    # def git_select_boxes(form)
+    #   # select_tag 'app[git][repo_type]', options_for_select([['Bitbucket', 0], ['Github', 1]])
+    #   form.select :repo_type, [['Bitbucket', 0], ['Github', 1]]#, { checked: contract.git.id }
+    # end
 
     def hosts_check_boxes(form)
       form.collection_check_boxes :hosts, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }

@@ -10,11 +10,11 @@ class InitialMigrations < ActiveRecord::Migration
       t.string :url
       t.string :user_name
       t.string :repo_name
-      t.string :request_token
-      t.string :request_secret
-      t.string :consumer_key
-      t.string :consumer_secret
-      t.string :net_http
+      t.string :oauth_token
+      t.string :oauth_secret
+      t.string :client_id
+      t.string :client_secret
+      t.string :adapter
       t.integer :repo_type, default: 0
       t.references :app, index: true
       t.timestamps

@@ -18,9 +18,10 @@ class Host::Cell < Cell::Concept
     include SimpleForm::ActionViewExtensions::FormHelper
     include ActionView::Helpers::FormOptionsHelper
 
-    def key_select_box(form)
-      form.collection_select :key, Key.all, :id, :name, { include_blank: true, checked: contract.key.id }
-    end
+    # def key_select_box(form)
+    #   pp form.object
+    #   form.collection_select :id, Key.all, :id, :name
+    # end
 
     def show
       render :form

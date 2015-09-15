@@ -8,11 +8,11 @@ class Git
       property :url
       property :user_name
       property :repo_name
-      property :request_token
-      property :request_secret
-      property :consumer_key
-      property :consumer_secret
-      property :net_http
+      property :oauth_token
+      property :oauth_secret
+      property :client_id
+      property :client_secret
+      property :adapter
       property :repo_type
 
       validate :is_a_git_repo?

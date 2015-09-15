@@ -27,6 +27,11 @@ class App
           populator: ->(fragment, model, options) { model || self.git = Git.find_by_id(fragment[:id]) || Git.new } do
         property :id
         property :url
+        property :oauth_token
+        property :oauth_secret
+        property :client_id
+        property :client_secret
+        property :adapter
         property :repo_type
       end
     end
@@ -47,13 +52,15 @@ class App
       # TODO: not sure if this should be here either
       return unless params[:app]
 
-      # TODO: Search the right way of doing this
-      # It trows a error if there is no key
-      params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
-
       # TODO: Is this the right thing
       # This is here becase populator does not remove from relation
       model.hosts = []
+    end
+
+    def setup_params!(params)
+      # TODO: Search the right way of doing this
+      # It trows a error if there is no key
+      params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
     end
   end
 
