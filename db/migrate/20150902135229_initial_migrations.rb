@@ -37,6 +37,22 @@ class InitialMigrations < ActiveRecord::Migration
 
     create_join_table :apps, :hosts
 
+    create_table :builds do |t|
+      t.string :state
+      t.references :app, index: true
+      t.references :host, index: true
+      t.timestamp :completed_at
+      t.string :type
+      t.timestamps
+    end
+
+    create_table :logs do |t|
+      t.string :name
+      t.string :value
+      t.references :logable, polymorphic: true, index: true
+      t.timestamps null: false
+    end
+
     # create_table :users do |t|
     #   t.string :email, limit: 255
     #   t.string :password_digest, limit: 255
@@ -52,23 +68,5 @@ class InitialMigrations < ActiveRecord::Migration
     #   t.text :value
     #   t.timestamps
     # end
-
-    create_table :tasks do |t|
-      t.string :name
-      t.text :value
-      t.string :state
-
-      t.references :app, index: true
-      t.references :host, index: true
-
-      t.timestamps
-    end
-
-    create_table :logs do |t|
-      t.string :name
-      t.string :value
-      t.references :logable, polymorphic: true, index: true, index: true
-      t.timestamps null: false
-    end
   end
 end

@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.integer "host_id", null: false
   end
 
+  create_table "builds", force: :cascade do |t|
+    t.string   "state"
+    t.integer  "app_id"
+    t.integer  "host_id"
+    t.datetime "completed_at"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "builds", ["app_id"], name: "index_builds_on_app_id"
+  add_index "builds", ["host_id"], name: "index_builds_on_host_id"
+
   create_table "gits", force: :cascade do |t|
     t.string   "url"
     t.string   "user_name"
@@ -60,5 +73,16 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "logs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "logable_id"
+    t.string   "logable_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "logs", ["logable_type", "logable_id"], name: "index_logs_on_logable_type_and_logable_id"
 
 end

@@ -18,18 +18,18 @@ class HostConnectionTest < MiniTest::Spec
     }
   ).model }
 
-  describe "connection" do
-    it "should ping host" do
-      tmp = Tempfile.new("test_temp")
-      tmp << key.value
-      tmp.rewind
-      ssh_key = tmp.path
-
-      command = Caracara::SSH.generate host.sys_user, host.address, ['ls'], { key: ssh_key }
-      byebug
-      Caracara::SSH.exec(command)
-      tmp.unlink
-    end
-  end
+  # describe "connection" do
+  #   it "should ping host" do
+  #     tmp = Tempfile.new("test_temp")
+  #     tmp << key.value
+  #     tmp.rewind
+  #     ssh_key = tmp.path
+  #
+  #     command = Caracara::SSH.generate host.sys_user, host.address, ['ls'], { key: ssh_key }
+  #     # byebug
+  #     Caracara::SSH.exec(command)
+  #     tmp.unlink
+  #   end
+  # end
 
 end # HostCrud
