@@ -1,0 +1,8 @@
+.header
+  %p
+    App name:
+    = link_to @app.name, app_path(@app)
+
+  %p
+    Host name:
+    = link_to @host.name, host_path(@host)

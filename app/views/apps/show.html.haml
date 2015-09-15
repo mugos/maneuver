@@ -1,14 +1,83 @@
 .header
   %h1= @app.name
   = link_to "Edit", edit_app_path(@app)
-  = link_to "Delete", app_path(@app), method: :delete
+  = link_to "Delete App", app_path(@app), method: :delete
   = link_to "Home", root_path
 
 .row
-  %h3 App Tasks
-  = link_to "Setup"
-  = link_to "Deploy"
-  = link_to "Rollback"
+  %h3 Hosts
+  - @app.hosts.each do |host|
+    %p= link_to host.name, app_host_builds_path(@app, host)
 
 .row
-  %h3 Ultimos deploys
+  %h3 Ultimos Deploys
+  %table
+    %tr
+      %th Commit/Version
+      %th state
+      %th Host
+      %th Data
+      %th Author
+    %tr
+      %td #000000
+      %td PASSED
+      %td Staging
+      %td Hoje
+      %td Gabriel
+    %tr
+      %td v.0.1.2
+      %td PASSED
+      %td Production
+      %td Hoje
+      %td Luiz
+  = link_to "VER TODOS ->"
+
+.row
+  %h3 Realizer um Deploy
+  .row
+    Por versão
+    = select :deploy, :host, options_for_select([["v0.1.2", "1"], ["v0.1.3", "2"]])
+    = select :deploy, :host, options_for_select([["Staging", "1"], ["Production", "2"]])
+    %input{type: "submit"}
+  .row
+    Por commit
+    %table
+      %tr
+        %th action
+        %th Commit/Version
+        %th desc
+        %th date
+        %th Author
+      %tr
+        %td radio-button
+        %td #000002
+        %td ...
+        %td Hoje
+        %td Gabriel
+      %tr
+        %td radio-button
+        %td #000001
+        %td ...
+        %td Hoje
+        %td Gabriel
+
+    = select :deploy, :host, options_for_select([["Staging", "1"], ["Production", "2"]])
+    %input{type: "submit"}
+
+.row
+  %h3 Tasks
+  %table
+    %tr
+      %th Nome
+      %th Enviroment
+      %th action
+    %tr
+      %td Restart
+      %td
+        = select :deploy, :host, options_for_select([["Staging", "1"], ["Production", "2"]])
+      %td RUN
+    %tr
+      %td Restart
+      %td
+        = select :deploy, :host, options_for_select([["Staging", "1"], ["Production", "2"]])
+      %td RUN

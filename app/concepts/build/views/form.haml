@@ -1,0 +1,25 @@
+.header
+  %h3 Edit App
+  = link_to "Home", root_path
+= simple_form_for contract do |f|
+  = f.input :name, placeholder: "Name", label: false
+
+  = f.simple_fields_for :git do |g|
+    = g.hidden_field :id
+    = g.input :url, placeholder: "Url", label: false
+    = g.input :oauth_token, placeholder: 'oauth_token', label: false
+    = g.input :oauth_secret, placeholder: 'oauth_secret', label: false
+    = g.input :client_id, placeholder: 'client_id', label: false
+    = g.input :client_secret, placeholder: 'client_secret', label: false
+    = g.select :adapter, [['net_http', 0]]
+    = g.select :repo_type, [['Bitbucket', 0], ['Github', 1]]
+
+  = f.input :script, placeholder: "Script", label: false
+  = hosts_check_boxes f
+  -# = f.simple_fields_for :hosts do |h|
+  -#   = h.collection_check_boxes :id, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }
+
+  = f.button :submit, class: :expand
+.errors
+  %span
+    Errors: #{model.errors.messages}

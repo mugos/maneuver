@@ -24,6 +24,7 @@ class Host
           populator: ->(fragment, model, options) { model || self.key = Key.find_by_id(fragment[:id]) || Key.new } do
         property :id
         property :name
+        property :value
       end
     end
   end
