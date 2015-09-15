@@ -3,16 +3,12 @@
   = link_to "Edit", edit_app_path(@app)
   = link_to "Delete", app_path(@app), method: :delete
   = link_to "Home", root_path
-.row
-  %h3 Hosts
-  - @app.hosts.each do |host|
-    = concept "host/cell", host
-
-.row
-  %h3 Git
-  = concept "git/cell", @app.git
-
 
 .row
   %h3 App Tasks
+  = link_to "Setup"
   = link_to "Deploy"
+  = link_to "Rollback"
+
+.row
+  %h3 Ultimos deploys

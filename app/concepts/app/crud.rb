@@ -47,17 +47,10 @@ class App
     end
 
     private
-
-    def setup_model!(params)
+    def setup_params!(params)
       # TODO: not sure if this should be here either
       return unless params[:app]
 
-      # TODO: Is this the right thing
-      # This is here becase populator does not remove from relation
-      model.hosts = []
-    end
-
-    def setup_params!(params)
       # TODO: Search the right way of doing this
       # It trows a error if there is no key
       params[:app][:hosts] = params[:app][:hosts].map{ |id| {id: id} unless id.blank? }.compact!
@@ -66,6 +59,16 @@ class App
 
   class Update < Create
     action :update
+
+    def process(params)
+      # TODO: Is this the right thing
+      # This is here becase populator does not remove from relation
+      model.hosts = []
+
+      validate(params[:app]) do |f|
+        f.save
+      end
+    end
   end
 
   class Destroy < Update

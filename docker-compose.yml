@@ -3,6 +3,9 @@ db:
   ports:
     - "5432:5432"
 
+disque:
+  image: jobflow/disque
+
 test:
   build: ./test/ssh_container
   ports:
@@ -14,6 +17,7 @@ maneuver:
   links:
     - db
     - test
+    - disque
   volumes:
     - ./:/app
     - ./test/ssh_container/ssh:/root/.ssh

@@ -50,6 +50,8 @@ gem 'tyrant'
 gem 'caracara', github: 'gabrielcorado/caracara'
 # A Ruby wrapper for the BitBucket REST API
 gem "bitbucket_rest_api"
+# Disc fills the gap between your Ruby service objects and antirez's wonderful Disque backend.
+gem 'disc'
 
 group :production do
   gem 'rails_12factor'
@@ -74,7 +76,6 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

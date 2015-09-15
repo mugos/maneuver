@@ -52,31 +52,23 @@ class InitialMigrations < ActiveRecord::Migration
     #   t.text :value
     #   t.timestamps
     # end
-    #
-    # create_table :task_logs do |t|
-    #   t.string :name
-    #   t.string :desc
-    #   t.string :state
-    #   t.string :type
-    #
-    #   t.references :app, index: true
-    #   t.references :host, index: true
-    #
-    #   t.timestamps
-    # end
-    #
-    # create_table :tasks do |t|
-    #   t.string :name
-    #   t.string :desc
-    #   t.text :script
-    #   t.timestamps
-    # end
-    #
-    # create_table :logs do |t|
-    #   t.string :name
-    #   t.string :value
-    #   t.references :logable, polymorphic: true, index: true, index: true
-    #   t.timestamps null: false
-    # end
+
+    create_table :tasks do |t|
+      t.string :name
+      t.text :value
+      t.string :state
+
+      t.references :app, index: true
+      t.references :host, index: true
+
+      t.timestamps
+    end
+
+    create_table :logs do |t|
+      t.string :name
+      t.string :value
+      t.references :logable, polymorphic: true, index: true, index: true
+      t.timestamps null: false
+    end
   end
 end
