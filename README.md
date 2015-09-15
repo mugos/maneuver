@@ -10,3 +10,6 @@ Deploy mananger using trailblazer
 [monban](https://github.com/apotonick/monban)
 [tyrant'](https://github.com/apotonick/tyrant)
 [Mina](http://mina-deploy.github.io/mina/)
+
+# Docker
+* `docker-compose run maneuver bundle install --path=vendor/bundle`
