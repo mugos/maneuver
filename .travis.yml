@@ -1,7 +1,12 @@
 language: ruby
-rvm:
-  - 2.2.0
+sudo: required
+services:
+  - docker
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 env:
   - "travis=true"
 script:
-  - bundle exec rake test
+  - docker-compose run maneuver rake test
