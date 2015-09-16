@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20150902135229) do
   create_table "apps", force: :cascade do |t|
     t.string   "name"
     t.string   "group"
-    t.text     "script"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,12 +26,13 @@ ActiveRecord::Schema.define(version: 20150902135229) do
   end
 
   create_table "builds", force: :cascade do |t|
-    t.string   "state"
     t.integer  "app_id"
     t.integer  "host_id"
-    t.datetime "completed_at"
+    t.string   "state"
     t.string   "type"
     t.text     "script"
+    t.text     "reference"
+    t.datetime "completed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

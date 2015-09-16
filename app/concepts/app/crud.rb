@@ -7,7 +7,6 @@ class App
     contract do
       property :name
       property :git
-      property :script
       property :group
 
       # PREPOPULATORS are a concept designed to prepare a form for rendering,

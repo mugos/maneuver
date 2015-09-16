@@ -3,7 +3,6 @@ class InitialMigrations < ActiveRecord::Migration
     create_table :apps do |t|
       t.string :name
       t.string :group
-      t.text :script
       t.timestamps
     end
 
@@ -39,12 +38,13 @@ class InitialMigrations < ActiveRecord::Migration
     create_join_table :apps, :hosts
 
     create_table :builds do |t|
-      t.string :state
       t.references :app, index: true
       t.references :host, index: true
-      t.timestamp :completed_at
+      t.string :state
       t.string :type
       t.text :script
+      t.text :reference
+      t.timestamp :completed_at
       t.timestamps
     end
 

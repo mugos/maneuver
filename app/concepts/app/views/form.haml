@@ -1,17 +1,15 @@
 .header
   %h3 Edit App
   = link_to "Home", root_path
+
 = simple_form_for contract do |f|
   = f.input :name, placeholder: "Name", label: false
 
   = f.simple_fields_for :git do |g|
-    =# g.hidden_field :id
     = g.input :url, placeholder: 'Url', label: false
     = g.input :oauth_token, placeholder: 'oauth_token', label: false
     = g.input :oauth_secret, placeholder: 'oauth_secret', label: false
     = g.select :type, [['Bitbucket', 'Repo::Bitbucket'], ['Github', 'Repo::Github']]
-
-  =# f.input :script, placeholder: "Script", label: false
 
   = # TODO: This should be a select
   = select_for_group f
