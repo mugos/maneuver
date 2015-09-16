@@ -10,3 +10,5 @@ env:
   - "travis=true"
 script:
   - docker-compose run maneuver rake test
+notifications:
+  email: false

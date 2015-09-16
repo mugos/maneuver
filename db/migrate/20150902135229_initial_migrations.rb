@@ -43,6 +43,7 @@ class InitialMigrations < ActiveRecord::Migration
       t.references :host, index: true
       t.timestamp :completed_at
       t.string :type
+      t.text :script
       t.timestamps
     end
 

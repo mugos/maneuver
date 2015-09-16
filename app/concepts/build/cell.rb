@@ -1,6 +1,6 @@
 require 'trb/cell/grid_cell.rb'
 
-class App::Cell < Cell::Concept
+class Build::Cell < Cell::Concept
   include Cell::Haml
   include Cell::GridCell
 
@@ -11,11 +11,11 @@ class App::Cell < Cell::Concept
   end
 
   def name_link
-    link_to "#{model.id} - #{model.name}", app_path(model)
+    link_to "----------", build_path(model)
   end
 
   class Form < Cell::Concept
-    inherit_views App::Cell
+    inherit_views Build::Cell
 
     # include Reform::Form::ActiveModel
     # include Reform::Form::ActiveModel::FormBuilderMethods
@@ -30,28 +30,19 @@ class App::Cell < Cell::Concept
     private
 
     property :contract
-    # 
-    # def git_select_boxes(form)
-    #   # select_tag 'app[git][repo_type]', options_for_select([['Bitbucket', 0], ['Github', 1]])
-    #   form.select :repo_type, [['Bitbucket', 0], ['Github', 1]]#, { checked: contract.git.id }
-    # end
-
-    def hosts_check_boxes(form)
-      form.collection_check_boxes :hosts, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }
-    end
   end
 
-  # The public helper that collects latest apps and renders the grid.
+  # The public helper that collects latest builds and renders the grid.
   class Grid < Cell::Concept
     include Cell::Caching::Notifications
 
     cache :show do
-      CacheVersion.for("app/cell/grid")
+      CacheVersion.for("build/cell/grid")
     end
 
     def show
-      apps = App.latest
-      concept("app/cell", collection: apps, last: apps.last)
+      builds = Build.latest
+      concept("build/cell", collection: builds, last: builds.last)
     end
   end
 end

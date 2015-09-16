@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.integer  "host_id"
     t.datetime "completed_at"
     t.string   "type"
+    t.text     "script"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

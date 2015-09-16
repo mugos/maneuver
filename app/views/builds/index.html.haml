@@ -1,8 +1,20 @@
 .header
   %p
     App name:
-    = link_to @app.name, app_path(@app)
+    =# link_to @app.name, app_path(@app)
 
   %p
     Host name:
-    = link_to @host.name, host_path(@host)
+    =# link_to @host.name, host_path(@host)
+
+.row
+  %h3 Create new build from
+
+  Commit:
+  = concept("build/cell/commits", @build)
+  %br
+  Tag:
+  = concept("build/cell/tags", @build)
+  %br
+  Task:
+  = concept("build/cell/tasks", @build)

@@ -7,7 +7,7 @@
 .row
   %h3 Hosts
   - @app.hosts.each do |host|
-    %p= link_to host.name, app_host_builds_path(@app, host)
+    %p= link_to host.name, new_app_host_build_path(@app, host)
 
 .row
   %h3 Ultimos Deploys

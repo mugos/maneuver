@@ -8,7 +8,7 @@ class BuildsController < ApplicationController
 
   def new
     form Build::Create
-    @form.prepopulate!
+    @form.prepopulate!(params)
 
     render_form
   end
@@ -18,7 +18,7 @@ class BuildsController < ApplicationController
       return redirect_to op.model
     end
 
-    @form.prepopulate!
+    @form.prepopulate!(params)
     render_form
   end
 
@@ -28,31 +28,6 @@ class BuildsController < ApplicationController
 
     form Build::Create # overrides @model and @form!
     @form.prepopulate!
-  end
-
-  def edit
-    form Build::Update
-
-    @form.prepopulate!
-
-    render_form
-  end
-
-  def update
-    run Build::Update do |op|
-      return redirect_to op.model
-    end
-
-    # @form.prepopulate!
-    render action: :new
-  end
-
-  # TODO: test me.
-  def destroy
-    run Build::Destroy do |op|
-      flash[:notice] = "#{op.model.name} deleted."
-      return redirect_to root_path
-    end
   end
 
   private

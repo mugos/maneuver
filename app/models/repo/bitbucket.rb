@@ -7,7 +7,6 @@ class Repo::Bitbucket < Git
   end
 
   def list_commits
-    pp bitbucket
     abort
   end
 
@@ -20,6 +19,7 @@ end
 # git.bitbucket
 # bitbucket = BitBucket.new client_id: '5LgBpkqZe49AeKXLjG', client_secret: 'NEpu6ND7MjRkzbXpQEQRWcbzDB7E8hKR'
 # bitbucket = BitBucket.new oauth_token: '5LgBpkqZe49AeKXLjG', oauth_secret: 'NEpu6ND7MjRkzbXpQEQRWcbzDB7E8hKR'
+# bitbucket = BitBucket.new oauth_token: 'NEpu6ND7MjRkzbXpQEQRWcbzDB7E8hKR', oauth_secret: '5LgBpkqZe49AeKXLjG'
 # bitbucket.repos.list
 # bitbucket.repos.keys.list git.user_name, git.repo_name
 #

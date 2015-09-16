@@ -1,3 +1,4 @@
+include Trailblazer::Operation::Dispatch
 class Build
   class Show < Trailblazer::Operation
     include CRUD
@@ -6,19 +7,21 @@ class Build
 
     contract do
       property :state
-      property :completed_at
-      property :type
 
       property :app,
-          prepopulator: ->(*) { self.app = model.app || App.new },
+          prepopulator: ->(options) { self.app = model.app || App.find_by_id(options[:app_id]) },
           populator: ->(fragment, model, options) { model || self.app = App.find_by_id(fragment[:id]) || App.new } do
         property :id
+        property :name
+        property :build_type, virtual: true
       end
 
       property :host,
-          prepopulator: ->(*) { self.host = model.host || Host.new },
+          prepopulator: ->(options) { self.host = model.host || Host.find_by_id(options[:host_id]) },
           populator: ->(fragment, model, options) { model || self.host = Host.find_by_id(fragment[:id]) || Host.new } do
         property :id
+        property :name
+        property :build_type, virtual: true
       end
     end
   end
@@ -27,49 +30,25 @@ class Build
     action :create
 
     def process(params)
-      validate(params[:app]) do |f|
-        f.save
+      validate(params[:build]) do |f|
+        build_type = params[:build][:build_type]
+        f.sync
+        pp '--------'
+        pp f.model
+        pp f.model.app
+        pp f.model.host
+        pp '--------'
+        abort
+        # f.save
       end
-    end
-  end
-
-  class Update < Create
-    action :update
-  end
-
-  class Destroy < Update
-    def process(params)
-      @model.destroy!
     end
   end
 
   class Index < Trailblazer::Operation
     include Collection
 
-    builds -> (params) do
-      # TODO: ASSYNC THIS
-      Build::Git.sync(params)
-    end
-
-    def model!
+    def model!(params)
       Build.all
     end
   end # index
-
-  class Git
-    def self.sync(params)
-      @app = App.find(params[:app_id])
-      @host = Host.find(params[:host_id])
-
-      git = @app.git
-
-      git.list_commits do |commit|
-        # Create new based on commit
-        pp '--------------'
-        pp commit
-        pp '--------------'
-      end
-      abort
-    end
-  end # Git sync
 end

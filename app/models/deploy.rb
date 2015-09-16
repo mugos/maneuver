@@ -1,2 +1,0 @@
-class Deploy < Build
-end

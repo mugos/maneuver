@@ -1,19 +1,24 @@
 .header
-  %h3 Edit App
-  = link_to "Home", root_path
-= simple_form_for contract do |f|
-  = f.input :name, placeholder: "Name", label: false
+  %h3 New Build
 
-  = f.simple_fields_for :git do |g|
-    = g.hidden_field :id
-    = g.input :oauth_token, placeholder: 'oauth_token', label: false
-    = g.input :oauth_secret, placeholder: 'oauth_secret', label: false
-    = g.select :type, [['Bitbucket', 0], ['Github', 1]]
+= simple_form_for [:app, :host, contract] do |f|
 
-  = f.input :script, placeholder: "Script", label: false
-  = hosts_check_boxes f
-  -# = f.simple_fields_for :hosts do |h|
-  -#   = h.collection_check_boxes :id, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }
+  = hidden_field_tag 'build[app][id]', contract.app.id
+  = hidden_field_tag 'build[host][id]', contract.host.id
+
+  .row
+    App name:
+    = contract.app.name
+  .row
+    Host name:
+    = contract.host.name
+
+  .row
+    %h2 Tasks
+    = concept "build/cell/task", @app
+  .row
+    %h2 Deploy
+    = concept "build/cell/deploy", @app
 
   = f.button :submit, class: :expand
 .errors
