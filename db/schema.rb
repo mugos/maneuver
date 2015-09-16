@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150902135229) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
+    t.string   "group"
     t.text     "script"
     t.datetime "created_at"
     t.datetime "updated_at"

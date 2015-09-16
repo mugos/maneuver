@@ -2,6 +2,7 @@ class InitialMigrations < ActiveRecord::Migration
   def change
     create_table :apps do |t|
       t.string :name
+      t.string :group
       t.text :script
       t.timestamps
     end

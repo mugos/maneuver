@@ -10,10 +10,6 @@ class Build::Cell < Cell::Concept
     render
   end
 
-  def name_link
-    link_to "----------", build_path(model)
-  end
-
   class Form < Cell::Concept
     inherit_views Build::Cell
 

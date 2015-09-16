@@ -11,7 +11,10 @@
     = g.input :oauth_secret, placeholder: 'oauth_secret', label: false
     = g.select :type, [['Bitbucket', 'Repo::Bitbucket'], ['Github', 'Repo::Github']]
 
-  = f.input :script, placeholder: "Script", label: false
+  =# f.input :script, placeholder: "Script", label: false
+
+  = # TODO: This should be a select
+  = select_for_group f
   = hosts_check_boxes f
   -# = f.simple_fields_for :hosts do |h|
   -#   = h.collection_check_boxes :id, Host.all, :id, :name, { checked: contract.hosts.map(&:id) }

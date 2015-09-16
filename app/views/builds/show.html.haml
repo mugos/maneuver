@@ -1,0 +1,8 @@
+.header
+  %h1= link_to "Home", root_path
+  = link_to "App", app_path(@build.app)
+.row
+  %p= @build.script
+  %p= @build.state
+  %p= @build.host.name
+  %p= @build.completed_at

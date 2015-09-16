@@ -10,11 +10,13 @@
 .row
   %h3 Create new build from
 
-  Commit:
-  = concept("build/cell/commits", @build)
-  %br
-  Tag:
-  = concept("build/cell/tags", @build)
-  %br
-  Task:
-  = concept("build/cell/tasks", @build)
+= concept(@cell, collection: @collection)
+
+Commit:
+=# concept("build/cell/commits", @build)
+%br
+Tag:
+=# concept("build/cell/tags", @build)
+%br
+Task:
+=# concept("build/cell/tasks", @build)

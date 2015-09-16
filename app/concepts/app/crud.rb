@@ -8,6 +8,7 @@ class App
       property :name
       property :git
       property :script
+      property :group
 
       # PREPOPULATORS are a concept designed to prepare a form for rendering,
       # whereas POPULATORS are meant to set up the form in *validate when the input hash is deserialized.

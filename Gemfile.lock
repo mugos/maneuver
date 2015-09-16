@@ -1,16 +1,16 @@
 GIT
   remote: git://github.com/apotonick/reform.git
-  revision: 3d1b563fc83461235bb135b999a1113cf7e2451b
+  revision: c2db7e661d0d5e8de208c8aadc211e8c8b3a8527
   specs:
-    reform (2.0.3)
-      disposable (~> 0.1.9)
+    reform (2.0.5)
+      disposable (~> 0.1.11)
       uber (~> 0.0.11)
 
 GIT
   remote: git://github.com/gabrielcorado/caracara.git
-  revision: 85dee5c613f1d64d5386067d840ffa06e26b585b
+  revision: 7eb1ff744e1a8789bfaabe21fe3eb15863225dba
   specs:
-    caracara (0.4.1)
+    caracara (0.6.0)
       mustache (~> 1.0)
 
 GIT
@@ -160,7 +160,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.0)
     minitest-capybara (0.7.2)
@@ -195,7 +195,7 @@ GEM
     nenv (0.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.7)
+    notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.18.3)
@@ -268,7 +268,7 @@ GEM
       activemodel (~> 4.0)
     simple_oauth (0.3.1)
     slop (3.6.0)
-    spring (1.3.6)
+    spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
     sprockets-rails (2.3.3)

@@ -23,6 +23,8 @@ class Build
         property :name
         property :build_type, virtual: true
       end
+
+      property :script
     end
   end
 
@@ -31,15 +33,7 @@ class Build
 
     def process(params)
       validate(params[:build]) do |f|
-        build_type = params[:build][:build_type]
-        f.sync
-        pp '--------'
-        pp f.model
-        pp f.model.app
-        pp f.model.host
-        pp '--------'
-        abort
-        # f.save
+        f.save
       end
     end
   end
