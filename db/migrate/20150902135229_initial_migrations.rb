@@ -15,7 +15,7 @@ class InitialMigrations < ActiveRecord::Migration
       t.string :client_id
       t.string :client_secret
       t.string :adapter
-      t.integer :repo_type, default: 0
+      t.string :type
       t.references :app, index: true
       t.timestamps
     end

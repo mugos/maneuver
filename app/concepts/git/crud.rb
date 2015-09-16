@@ -10,10 +10,8 @@ class Git
       property :repo_name
       property :oauth_token
       property :oauth_secret
-      property :client_id
-      property :client_secret
       property :adapter
-      property :repo_type
+      property :type
 
       validate :is_a_git_repo?
 

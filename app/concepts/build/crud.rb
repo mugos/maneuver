@@ -5,7 +5,6 @@ class Build
     model Build, :find
 
     contract do
-
       property :state
       property :completed_at
       property :type
@@ -47,8 +46,30 @@ class Build
   class Index < Trailblazer::Operation
     include Collection
 
-    def model!(params)
+    builds -> (params) do
+      # TODO: ASSYNC THIS
+      Build::Git.sync(params)
+    end
+
+    def model!
       Build.all
     end
   end # index
+
+  class Git
+    def self.sync(params)
+      @app = App.find(params[:app_id])
+      @host = Host.find(params[:host_id])
+
+      git = @app.git
+
+      git.list_commits do |commit|
+        # Create new based on commit
+        pp '--------------'
+        pp commit
+        pp '--------------'
+      end
+      abort
+    end
+  end # Git sync
 end

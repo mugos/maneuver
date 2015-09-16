@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.string   "client_id"
     t.string   "client_secret"
     t.string   "adapter"
-    t.integer  "repo_type",     default: 0
+    t.string   "type"
     t.integer  "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"

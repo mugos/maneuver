@@ -2,9 +2,6 @@ class BuildsController < ApplicationController
   respond_to :html
 
   def index
-    @app = App.find(params[:app_id])
-    @host = Host.find(params[:host_id])
-
     collection Build::Index
     @cell = "build/cell"
   end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   resources :hosts
+  resources :keys
 
 
   namespace :api do

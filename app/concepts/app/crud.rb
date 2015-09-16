@@ -1,15 +1,10 @@
-require 'uri'
-
 class App
   class Show < Trailblazer::Operation
     include CRUD
 
-    # include Responder
     model App, :find
 
     contract do
-      # include Reform::Form::ModelReflections
-
       property :name
       property :git
       property :script
@@ -29,10 +24,7 @@ class App
         property :url
         property :oauth_token
         property :oauth_secret
-        property :client_id
-        property :client_secret
-        property :adapter
-        property :repo_type
+        property :type
       end
     end
   end

@@ -10,9 +10,9 @@
   = f.simple_fields_for :key, include_id: false do |k|
     = k.collection_select :id, Key.all, :id, :name
 
-  = f.simple_fields_for :key do |k|
-    = k.input :name, placeholder: "name", label: false
-    = k.input :value, placeholder: "value", label: false
+  -# = f.simple_fields_for :key do |k|
+  -#   = k.input :name, placeholder: "name", label: false
+  -#   = k.input :value, placeholder: "value", label: false
 
 
   = f.button :submit, class: :expand
