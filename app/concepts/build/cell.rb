@@ -9,6 +9,18 @@ class Build::Cell < Cell::Concept
   def show
     render
   end
+    
+  class Deploy < Build::Cell
+    def show
+      render :deploy
+    end
+  end # Deploy
+
+  class Task < Build::Cell
+    def show
+      render :task
+    end
+  end # Task
 
   class Form < Cell::Concept
     inherit_views Build::Cell
@@ -26,7 +38,7 @@ class Build::Cell < Cell::Concept
     private
 
     property :contract
-  end
+  end # Form
 
   # The public helper that collects latest builds and renders the grid.
   class Grid < Cell::Concept
@@ -40,5 +52,5 @@ class Build::Cell < Cell::Concept
       builds = Build.latest
       concept("build/cell", collection: builds, last: builds.last)
     end
-  end
+  end # Grid
 end

@@ -1,4 +1,3 @@
-include Trailblazer::Operation::Dispatch
 class Build
   class Show < Trailblazer::Operation
     include CRUD
@@ -6,14 +5,11 @@ class Build
     model Build, :find
 
     contract do
-      property :state
-
       property :app,
           prepopulator: ->(options) { self.app = model.app || App.find_by_id(options[:app_id]) },
           populator: ->(fragment, model, options) { model || self.app = App.find_by_id(fragment[:id]) || App.new } do
         property :id
         property :name
-        property :build_type, virtual: true
       end
 
       property :host,
@@ -21,9 +17,9 @@ class Build
           populator: ->(fragment, model, options) { model || self.host = Host.find_by_id(fragment[:id]) || Host.new } do
         property :id
         property :name
-        property :build_type, virtual: true
       end
 
+      property :state
       property :script
     end
   end

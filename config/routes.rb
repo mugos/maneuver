@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   end
   resources :hosts
   resources :keys
-  resources :builds
-
 
   namespace :api do
     resources :apps
