@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module Maneuver
   class Application < Rails::Application
+    # Disc fills the gap between your Ruby service objects and antirez's wonderful Disque backend.
+    require 'active_job/queue_adapters/disc_adapter'
+    config.active_job.queue_adapter = :disc
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 

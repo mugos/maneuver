@@ -52,6 +52,10 @@ gem 'caracara', github: 'gabrielcorado/caracara'
 gem "bitbucket_rest_api"
 # Disc fills the gap between your Ruby service objects and antirez's wonderful Disque backend.
 gem 'disc'
+# Object-hash mapping library for Redis.
+gem 'ohm'
+# Uses the fast and compact msgpack binary format to let you serialize objects.
+gem 'msgpack_rails'
 
 group :production do
   gem 'rails_12factor'

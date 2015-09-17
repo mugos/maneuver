@@ -18,3 +18,6 @@ ADD Gemfile* $APP_HOME/
 RUN bundle install --path vendor/bundle
 
 ADD . $APP_HOME
+
+ENV QUEUES=urgent,build,default
+CMD disc -r ./disc_init.rb

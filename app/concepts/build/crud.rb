@@ -30,6 +30,7 @@ class Build
     def process(params)
       validate(params[:build]) do |f|
         f.save
+        ::CreateBuild.perform_later(f.model.id)
       end
     end
   end
