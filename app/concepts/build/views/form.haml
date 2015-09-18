@@ -1,13 +1,23 @@
+.header
+  %h3 New Build
+
+.row
+  App name:
+  = contract.app.name
+.row
+  Host name:
+  = contract.host.name
+
 = simple_form_for [:app, :host, contract] do |f|
   = hidden_field_tag 'build[app][id]', contract.app.id
   = hidden_field_tag 'build[host][id]', contract.host.id
 
   .row
     %h2 Deploy
-    = concept "build/cell/deploy", contract
+    = concept "build/cell/deploy", contract.app
   .row
     %h2 Tasks
-    = concept "build/cell/task", contract
+    = concept "build/cell/task"
 
   .row
     = f.button :submit, class: :expand

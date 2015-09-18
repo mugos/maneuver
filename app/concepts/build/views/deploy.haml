@@ -1,3 +1,4 @@
+Commit:
 = radio_button_tag 'build[script]', :commit
 
 %table
@@ -8,11 +9,11 @@
     %th date
     %th Author
     %th Status
-= list_commits do |commit|
-  %tr
-    %td= radio_button_tag 'build[reference]', commit.hash
-    %td= commit.hash
-    %td= commit.message.gsub("\n",'')
-    %td date
-    %td= commit.author.raw
-    %td= deploy_status commit.hash
+  - list_commits do |commit|
+    %tr
+      %td= radio_button_tag 'build[reference]', commit.hash
+      %td= commit.hash
+      %td= commit.message.gsub("\n",'')
+      %td= commit.date
+      %td= commit.author.raw
+      %td= deploy_status commit.hash

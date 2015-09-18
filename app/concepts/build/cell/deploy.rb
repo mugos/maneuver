@@ -1,15 +1,15 @@
 class Build::Cell::Deploy < Build::Cell
+
   def show
-    self.
-    concept("build/cell", collection: builds)
+    render :deploy
   end
 
-  def list_commits
-    pp '------------'
-    pp self.app.class.name
-    pp '------------'
-    abort
-    self.model.app.git.list_commits
+  def list_commits(&block)
+    model.git.list_commits[:values].each {|commit| block.call(commit)}
+  end
+
+  def list_tags(&block)
+    model.git.list_tags.each {|tag| block.call(tag)}
   end
 
   def deploy_status(commit)

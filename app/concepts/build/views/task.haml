@@ -1,1 +1,8 @@
-= select_tag 'build[script]', options_for_select([['Bitbucket', 0], ['Github', 1]])
+%table
+  %tr
+    %th Nome
+    %th action
+  - 3.times.each do
+    %tr
+      %td Restart
+      %td= radio_button_tag 'build[script]', :ls

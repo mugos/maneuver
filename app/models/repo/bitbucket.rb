@@ -4,11 +4,10 @@ class Repo::Bitbucket < Git
   end
 
   def list_commits
-    commits = bitbucket_client.repos.commits.get self.user_name, self.repo_name
-    commits[:values]
+    bitbucket_client.repos.commits.get self.user_name, self.repo_name
   end
 
   def list_tags
-    abort
+    bitbucket_client.repos.tags.get self.user_name, self.repo_name
   end
 end

@@ -1,5 +1,4 @@
 class Build::Cell::Form < Build::Cell
-  inherit_views Build::Cell
 
   def show
     render :form

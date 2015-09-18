@@ -10,6 +10,7 @@ class Build
           populator: ->(fragment, model, options) { model || self.app = App.find_by_id(fragment[:id]) || App.new } do
         property :id
         property :name
+        property :git
       end
 
       property :host,
