@@ -10,14 +10,26 @@ RUN gem install bundler --no-ri --no-rdoc
 # Install Rails
 RUN gem install rails -v 4.2.0 --no-ri --no-rdoc
 
+# Queues names
+ENV QUEUES=urgent,build,default
+
+# Define Home
 ENV APP_HOME /app
+
+# Create Home
 RUN mkdir $APP_HOME
+
+# Define workdr
 WORKDIR $APP_HOME
 
-ADD Gemfile* $APP_HOME/
-RUN bundle install --path vendor/bundle
+# Env for Bundle
+ENV BUNDLE_PATH /data
 
+# Andd rest
 ADD . $APP_HOME
 
-ENV QUEUES=urgent,build,default
+# Run assync
 RUN disc -r ./disc_init.rb
+
+# RUN Rails
+CMD rails s -p 3000 -b '0.0.0.0'

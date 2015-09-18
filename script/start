@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "-----> Bundling gems"
+bundle check || bundle install --jobs 4 --retry 3
+
+echo "-----> Clearing logs"
+bin/rake log:clear
+
+echo "-----> Removing contents of tmp dirs"
+bin/rake tmp:clear
+
+echo '-----> Start rails app'
+rails s -p 3000 -b '0.0.0.0'

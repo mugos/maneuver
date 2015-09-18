@@ -1,30 +1,9 @@
-data:
-  image: busybox
-  volumes:
-    - /app/vendor/bundle
-    - /data
-
-db:
-  image: postgres
-  ports:
-    - "5432:5432"
-
-disque:
-  image: jobflow/disque
-  volumes_from:
-    - data
-
-test:
-  build: ./test/ssh_container
-  ports:
-    - "2222:22"
-
 maneuver:
   build: .
-  command: rails s -p 3000 -b '0.0.0.0'
+  command: ./script/start
   links:
-    - db
-    - test
+    # - db
+    # - test
     - disque
   volumes_from:
     - data
@@ -33,3 +12,23 @@ maneuver:
     - ./test/ssh_container/ssh:/root/.ssh
   ports:
     - "3000:3000"
+
+disque:
+  image: jobflow/disque
+  volumes_from:
+    - data
+
+data:
+  image: busybox
+  volumes:
+    - /data
+
+db:
+  image: postgres
+  ports:
+    - "5432:5432"
+
+test:
+  build: ./test/ssh_container
+  ports:
+    - "2222:22"

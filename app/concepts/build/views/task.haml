@@ -1,12 +1,1 @@
-%div
-  = radio_button_tag "build[script]", :ls
-  = "Setup"
-%div
-  = radio_button_tag "build[script]", :ls
-  = "Restart"
-%div
-  = radio_button_tag "build[script]", :ls
-  = "Reindex"
-%div
-  = radio_button_tag "build[script]", :ls
-  = "Migrate"
+= select_tag 'build[script]', options_for_select([['Bitbucket', 0], ['Github', 1]])

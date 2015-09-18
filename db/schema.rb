@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150902135229) do
     t.string   "url"
     t.string   "user_name"
     t.string   "repo_name"
+    t.string   "api_key"
     t.string   "oauth_token"
     t.string   "oauth_secret"
     t.string   "client_id"

@@ -1,0 +1,11 @@
+.header
+  %h3 New Build
+
+.row
+  App name:
+  = @app.name
+.row
+  Host name:
+  = @host.name
+
+= concept("build/cell/form", @operation)

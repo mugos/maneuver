@@ -1,13 +1,3 @@
-.header
-  %h3 New Build
-
-.row
-  App name:
-  = contract.app.name
-.row
-  Host name:
-  = contract.host.name
-
 = simple_form_for [:app, :host, contract] do |f|
   = hidden_field_tag 'build[app][id]', contract.app.id
   = hidden_field_tag 'build[host][id]', contract.host.id

@@ -22,8 +22,7 @@ class App
           populator: ->(fragment, model, options) { model || self.git = Git.find_by_id(fragment[:id]) || Git.new } do
         property :id
         property :url
-        property :oauth_token
-        property :oauth_secret
+        property :api_key
         property :type
       end
     end

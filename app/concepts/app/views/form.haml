@@ -7,8 +7,7 @@
 
   = f.simple_fields_for :git do |g|
     = g.input :url, placeholder: 'Url', label: false
-    = g.input :oauth_token, placeholder: 'oauth_token', label: false
-    = g.input :oauth_secret, placeholder: 'oauth_secret', label: false
+    = g.input :api_key, placeholder: 'Api Key', label: false  
     = g.select :type, [['Bitbucket', 'Repo::Bitbucket'], ['Github', 'Repo::Github']]
 
   = # TODO: This should be a select

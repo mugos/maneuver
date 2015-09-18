@@ -7,9 +7,11 @@ class BuildsController < ApplicationController
   end
 
   def new
+    @app = App.find(params[:app_id])
+    @host = Host.find(params[:host_id])
+
     form Build::Create
     @form.prepopulate!(params)
-
     render_form
   end
 

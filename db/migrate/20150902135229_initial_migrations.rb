@@ -10,6 +10,7 @@ class InitialMigrations < ActiveRecord::Migration
       t.string :url
       t.string :user_name
       t.string :repo_name
+      t.string :api_key
       t.string :oauth_token
       t.string :oauth_secret
       t.string :client_id
