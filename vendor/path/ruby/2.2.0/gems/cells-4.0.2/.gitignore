@@ -1,9 +1,0 @@
-.DS_Store
-pkg
-*.gem
-.*~
-.bundle
-*.lock
-test/dummy/log/
-test/dummy/tmp/
-/.rvmrc
