@@ -10,6 +10,12 @@ RUN gem install bundler --no-ri --no-rdoc
 # Install Rails
 RUN gem install rails -v 4.2.0 --no-ri --no-rdoc
 
+# Install Changelog Generator
+RUN gem install github_changelog_generator
+
+# Install Disc
+RUN gem install disc
+
 # Queues names
 ENV QUEUES=urgent,build,default
 
@@ -32,4 +38,4 @@ ADD . $APP_HOME
 RUN disc -r ./disc_init.rb
 
 # RUN Rails
-CMD rails s -p 3000 -b '0.0.0.0'
+# CMD rails s -p 3000 -b '0.0.0.0'
