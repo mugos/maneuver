@@ -17,3 +17,21 @@ Commit:
       %td= commit.date
       %td= commit.author.raw
       %td= deploy_status commit.hash
+
+
+%table
+  %tr
+    %th action
+    %th Commit/Version
+    %th desc
+    %th date
+    %th Author
+    %th Status
+  - list_tags do |commit|
+    %tr
+      %td= radio_button_tag 'build[reference]', commit.hash
+      %td= commit.hash
+      %td= commit.message.gsub("\n",'')
+      %td= commit.date
+      %td= commit.author.raw
+      %td= deploy_status commit.hash
